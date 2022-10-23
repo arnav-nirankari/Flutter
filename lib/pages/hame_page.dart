@@ -10,11 +10,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hello world"),
+        title: Text("Jumbo Electronics"),
       ),
       body: Center(
           child: Container(
-        child: Text("Welcome to $days days of flutter by $name"),
+        child: Text("Welcome to Jumbo Electronics"),
       ) // Container
           ), // Center
       drawer: Drawer(),
