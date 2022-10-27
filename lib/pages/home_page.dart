@@ -10,15 +10,17 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Jumbo Electronics"),
+        backgroundColor: Colors.amber,
+        foregroundColor: Colors.black,
+        title: const Text("Jumbo Electronics"),
         surfaceTintColor: Colors.deepPurple,
       ),
       body: Center(
           child: Container(
-        child: Text("Welcome to Jumbo Electronics"),
+        child: const Text("Welcome to Jumbo Electronics"),
       ) // Container
           ), // Center
-      drawer: Drawer(),
+      drawer: const Drawer(),
     ); // Material;
   }
 }
