@@ -84,34 +84,37 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(
                         height: 35,
                       ),
-                      InkWell(
-                        onTap: () => formprocess(context),
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 600),
-                          height: 40,
-                          width: changebutton ? 45 : 120,
-                          alignment: Alignment.center,
-                          // color: Colors.deepPurple,
-                          decoration: BoxDecoration(
-                            color: Colors.deepPurple,
-                            // shape: changebutton
-                            //     ? BoxShape.circle
-                            //     : BoxShape.rectangle,
-                            borderRadius:
-                                BorderRadius.circular(changebutton ? 40 : 7),
-                          ),
-                          child: changebutton
-                              ? const Icon(
-                                  Icons.check_circle_outline,
-                                  color: Colors.white,
-                                  size: 30,
-                                )
-                              : const Text(
-                                  "Login",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
+                      Material(
+                        color: Colors.deepPurple,
+                        borderRadius:
+                            BorderRadius.circular(changebutton ? 40 : 7),
+                        child: InkWell(
+                          onTap: () => formprocess(context),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 600),
+                            height: 40,
+                            width: changebutton ? 45 : 120,
+                            alignment: Alignment.center,
+                            // color: Colors.deepPurple,
+                            decoration: const BoxDecoration(
+
+                                // shape: changebutton
+                                //     ? BoxShape.circle
+                                //     : BoxShape.rectangle,
                                 ),
+                            child: changebutton
+                                ? const Icon(
+                                    Icons.check_circle_outline,
+                                    color: Colors.white,
+                                    size: 30,
+                                  )
+                                : const Text(
+                                    "Login",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                          ),
                         ),
                       )
                     ],

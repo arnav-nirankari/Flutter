@@ -2,6 +2,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:flutter/material.dart';
+import 'package:jumbo_electronics/pages/widgets/MyDrawer.dart';
 
 class HomePage extends StatelessWidget {
   final int days = 30;
@@ -10,17 +11,17 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amber,
-        foregroundColor: Colors.black,
-        title: const Text("Jumbo Electronics"),
+        centerTitle: true,
+        title: const Text(
+          "Jumbo Electronics",
+          textAlign: TextAlign.center,
+        ),
         surfaceTintColor: Colors.deepPurple,
       ),
-      body: Center(
-          child: Container(
-        child: const Text("Welcome to Jumbo Electronics"),
-      ) // Container
-          ), // Center
-      drawer: const Drawer(),
+      body:
+          const Center(child: Text("Welcome to Jumbo Electronics") // Container
+              ), // Center
+      drawer: MyDrawer(),
     ); // Material;
   }
 }

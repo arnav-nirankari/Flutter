@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:jumbo_electronics/pages/home_page.dart';
 import 'package:jumbo_electronics/pages/login_page.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:jumbo_electronics/pages/utils/routes.dart';
+import 'package:jumbo_electronics/pages/widgets/themes.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,14 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // home: HomePage(),
       themeMode: ThemeMode.system,
-      theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-          fontFamily: GoogleFonts.lato().fontFamily),
-
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-      ),
-      initialRoute: "/login",
+      theme: MyTheme.lightTheme(context),
+      debugShowCheckedModeBanner: false,
+      darkTheme: MyTheme.darkTheme(context),
+      initialRoute: "/home",
       routes: {
         MyRoutes.homeRoute: (context) => HomePage(),
         MyRoutes.loginRoute: (context) => LoginPage()
