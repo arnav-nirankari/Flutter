@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:jumbo_electronics/pages/widgets/item_widget.dart';
@@ -7,12 +10,37 @@ import 'package:jumbo_electronics/pages/widgets/MyDrawer.dart';
 
 import '../models/catalog.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final int days = 30;
+
   final String name = "Arnav";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    await Future.delayed(const Duration(seconds: 2));
+    final catalogJson =
+        await rootBundle.loadString("assets/files/catalog.json");
+    final jsonDecoded = await jsonDecode(catalogJson);
+    final prodData = jsonDecoded["products"];
+    CatalogModel.items =
+        List.from(prodData).map<Item>((item) => Item.fromMap(item)).toList();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    final randomList = List.generate(20, (index) => CatalogModel.items[0]);
+    // final randomList = List.generate(20, (index) => CatalogModel.items[0]);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -20,14 +48,15 @@ class HomePage extends StatelessWidget {
         ),
       ),
       body: ListView.builder(
-        itemCount: randomList.length,
+        itemCount: CatalogModel.items.length,
         physics: const ScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
           return ItemWidget(
-            item: randomList[index],
+            item: CatalogModel.items[index],
           );
         },
-      ), // Center
+      ),
+      // : const Center(child: CircularProgressIndicator()), // Center
       drawer: MyDrawer(),
     ); // Material;
   }
