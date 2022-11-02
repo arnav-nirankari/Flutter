@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                 header: Container(
                     padding: EdgeInsets.all(12),
                     decoration: const BoxDecoration(
-                      color: Colors.deepPurple,
+                      color: Color.fromARGB(199, 124, 77, 255),
                     ),
                     child: Text(
                       item.name,
