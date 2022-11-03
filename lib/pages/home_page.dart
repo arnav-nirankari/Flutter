@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:jumbo_electronics/pages/widgets/HomeGrid.dart';
 import 'package:jumbo_electronics/pages/widgets/item_widget.dart';
 
 import 'package:flutter/material.dart';
@@ -47,45 +48,47 @@ class _HomePageState extends State<HomePage> {
           "Jumbo Electronics",
         ),
       ),
-      body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 16,
-        ),
-        itemBuilder: ((context, index) {
-          final item = CatalogModel.items[index];
-          return Card(
-            clipBehavior: Clip.antiAlias,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            child: GridTile(
-                header: Container(
-                    padding: EdgeInsets.all(12),
-                    decoration: const BoxDecoration(
-                      color: Color.fromARGB(199, 124, 77, 255),
-                    ),
-                    child: Text(
-                      item.name,
-                      style: TextStyle(color: Colors.white),
-                    )),
-                footer: Container(
-                    padding: EdgeInsets.all(12),
-                    decoration: const BoxDecoration(
-                      color: Colors.black45,
-                    ),
-                    child: Text(
-                      item.price.toString(),
-                      style: TextStyle(color: Colors.white),
-                    )),
-                child: Image.network(
-                  item.image,
-                  fit: BoxFit.contain,
-                )),
-          );
-        }),
-        itemCount: CatalogModel.items.length,
-      ),
+
+      body: HomeGrid(items: CatalogModel.items),
+      // body: GridView.builder(
+      //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      //     crossAxisCount: 2,
+      //     crossAxisSpacing: 10,
+      //     mainAxisSpacing: 16,
+      //   ),
+      //   itemBuilder: ((context, index) {
+      //     final item = CatalogModel.items[index];
+      //     return Card(
+      //       clipBehavior: Clip.antiAlias,
+      //       shape:
+      //           RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      //       child: GridTile(
+      //           header: Container(
+      //               padding: EdgeInsets.all(12),
+      //               decoration: const BoxDecoration(
+      //                 color: Color.fromARGB(199, 124, 77, 255),
+      //               ),
+      //               child: Text(
+      //                 item.name,
+      //                 style: TextStyle(color: Colors.white),
+      //               )),
+      //           footer: Container(
+      //               padding: EdgeInsets.all(12),
+      //               decoration: const BoxDecoration(
+      //                 color: Colors.black45,
+      //               ),
+      //               child: Text(
+      //                 item.price.toString(),
+      //                 style: TextStyle(color: Colors.white),
+      //               )),
+      //           child: Image.network(
+      //             item.image,
+      //             fit: BoxFit.contain,
+      //           )),
+      //     );
+      //   }),
+      //   itemCount: CatalogModel.items.length,
+      // ),
 
       // ListView.builder(
       //   itemCount: CatalogModel.items.length,
