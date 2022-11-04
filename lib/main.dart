@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:jumbo_electronics/pages/cart.dart';
 import 'package:jumbo_electronics/pages/home_page.dart';
 import 'package:jumbo_electronics/pages/login_page.dart';
+import 'package:jumbo_electronics/pages/products.dart';
 
 import 'package:jumbo_electronics/pages/utils/routes.dart';
 import 'package:jumbo_electronics/pages/widgets/themes.dart';
@@ -21,7 +23,9 @@ class MyApp extends StatelessWidget {
       initialRoute: "/home",
       routes: {
         MyRoutes.homeRoute: (context) => HomePage(),
-        MyRoutes.loginRoute: (context) => LoginPage()
+        MyRoutes.loginRoute: (context) => LoginPage(),
+        MyRoutes.cartRoute: (context) => UserCart(),
+        // MyRoutes.prodRoute: (context) => HomeProducts()
       },
     ); // MaterialApp
   }

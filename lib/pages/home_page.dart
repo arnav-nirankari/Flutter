@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:jumbo_electronics/pages/utils/routes.dart';
 import 'package:jumbo_electronics/pages/widgets/HomeGrid.dart';
 import 'package:jumbo_electronics/pages/widgets/item_widget.dart';
 
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
-    await Future.delayed(const Duration(seconds: 0));
+    await Future.delayed(const Duration(seconds: 3));
     final catalogJson =
         await rootBundle.loadString("assets/files/catalog.json");
     final jsonDecoded = await jsonDecode(catalogJson);
@@ -48,6 +49,13 @@ class _HomePageState extends State<HomePage> {
           "Jumbo Electronics",
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, MyRoutes.cartRoute);
+        },
+        child: Icon(Icons.shopping_cart_outlined),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
 
       body: HomeGrid(items: CatalogModel.items),
       // body: GridView.builder(

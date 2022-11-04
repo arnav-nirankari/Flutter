@@ -4,6 +4,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:jumbo_electronics/pages/products.dart';
+import 'package:jumbo_electronics/pages/utils/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import 'package:jumbo_electronics/models/catalog.dart';
@@ -25,7 +27,14 @@ class HomeGrid extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const CatalogHeader(),
-              Expanded(child: CatalogList(items: items)),
+              if (CatalogModel.items.length > 1 &&
+                  CatalogModel.items.isNotEmpty)
+                Expanded(child: CatalogList(items: items))
+              else
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.center,
+                        child: const CircularProgressIndicator())),
             ],
           ),
         ),
@@ -48,9 +57,17 @@ class CatalogList extends StatelessWidget {
       // shrinkWrap: true,
       itemBuilder: ((context, index) {
         final catalog = items[index];
-        print(items.length);
-        return CatalogItem(
-          catalog: catalog,
+        //  print(items.length);
+        return InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomeProducts(items: catalog)));
+          },
+          child: CatalogItem(
+            catalog: catalog,
+          ),
         );
       }),
       itemCount: CatalogModel.items.length,
@@ -76,7 +93,9 @@ class CatalogItem extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(19))),
         child: Row(
           children: [
-            CatalogImage(catalog: catalog),
+            Hero(
+                tag: Key(catalog.id.toString()),
+                child: CatalogImage(catalog: catalog)),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,7 +114,7 @@ class CatalogItem extends StatelessWidget {
                         color: Color.fromARGB(153, 0, 0, 0)),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 8, right: 8.0),
+                    padding: const EdgeInsets.only(top: 8, right: 9.0),
                     child: ButtonBar(
                         buttonPadding: const EdgeInsets.all(0),
                         alignment: MainAxisAlignment.spaceBetween,
