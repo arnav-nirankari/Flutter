@@ -37,7 +37,8 @@ class HomeProducts extends StatelessWidget {
                           MediaQuery.of(context).size.height * 0.068))),
                   child: const Text(
                     "Buy",
-                    // style: TextStyle(fontSize: 22),
+                    textScaleFactor: 1.39,
+                    style: TextStyle(fontWeight: FontWeight.w700),
                   ))
             ]),
       ),
@@ -64,15 +65,17 @@ class HomeProducts extends StatelessWidget {
                 children: [
                   Text(
                     items.name,
+                    textScaleFactor: 1.8,
                     style: const TextStyle(
-                      fontSize: 23,
+                      // fontSize: 23,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     items.desc,
+                    textScaleFactor: 1.1,
                     style: const TextStyle(
-                      fontSize: 15,
+                      // fontSize: 15,
                       fontWeight: FontWeight.w100,
                     ),
                   ),

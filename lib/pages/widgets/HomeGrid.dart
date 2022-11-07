@@ -97,28 +97,40 @@ class AddButton extends StatelessWidget {
       (cart) => cart.items.contains(item),
     );
 
-    return TextButton(
-      onPressed: isInCart
-          ? null
-          : () {
-              // If the item is not in cart, we let the user add it.
-              // We are using context.read() here because the callback
-              // is executed whenever the user taps the button. In other
-              // words, it is executed outside the build method.
-              var cart = context.read<CartModel>();
-              cart.add(item);
-            },
-      style: ButtonStyle(
-        overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
-          if (states.contains(MaterialState.pressed)) {
-            return Theme.of(context).primaryColor;
-          }
-          return null; // Defer to the widget's default.
-        }),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 500),
+      width: isInCart ? 45 : 120,
+      child: TextButton(
+        onPressed: isInCart
+            ? null
+            : () {
+                // If the item is not in cart, we let the user add it.
+                // We are using context.read() here because the callback
+                // is executed whenever the user taps the button. In other
+                // words, it is executed outside the build method.
+                var cart = context.read<CartModel>();
+                cart.add(item);
+              },
+        style: ButtonStyle(
+            // overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
+            //   if (states.contains(MaterialState.pressed)) {
+            //     return Theme.of(context).primaryColor;
+            //   }
+            //   return null; // Defer to the widget's default.
+            // },
+            backgroundColor: MaterialStateProperty.all(Colors.deepPurple),
+            shape: MaterialStateProperty.all(const StadiumBorder())),
+        child: isInCart
+            ? const Icon(
+                Icons.task_alt,
+                semanticLabel: 'ADDED',
+                color: Colors.white,
+              )
+            : const Text(
+                'Add to Cart',
+                style: TextStyle(color: Colors.white),
+              ),
       ),
-      child: isInCart
-          ? const Icon(Icons.check, semanticLabel: 'ADDED')
-          : const Text('ADD'),
     );
   }
 }
@@ -158,13 +170,14 @@ class CatalogItem extends StatelessWidget {
                     ),
                     Text(
                       catalog.desc,
+                      // textAlign: TextAlign.center,
+                      textScaleFactor: 1.1,
                       style: const TextStyle(
                           fontWeight: FontWeight.w100,
-                          fontSize: 14,
                           color: Color.fromARGB(153, 0, 0, 0)),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 8, right: 4.0),
+                      padding: const EdgeInsets.only(top: 14, right: 4.0),
                       child: ButtonBar(
                           buttonPadding: const EdgeInsets.all(0),
                           alignment: MainAxisAlignment.spaceBetween,

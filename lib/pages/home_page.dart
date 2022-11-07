@@ -9,8 +9,10 @@ import 'package:jumbo_electronics/pages/widgets/item_widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:jumbo_electronics/pages/widgets/MyDrawer.dart';
-
+import 'package:badges/badges.dart';
+import 'package:provider/provider.dart';
 import '../models/catalog.dart';
+import 'package:jumbo_electronics/models/cart.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -42,6 +44,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var cart = context.watch<CartModel>();
     // final randomList = List.generate(20, (index) => CatalogModel.items[0]);
     return Scaffold(
       appBar: AppBar(
@@ -49,11 +52,20 @@ class _HomePageState extends State<HomePage> {
           "Jumbo Electronics",
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, MyRoutes.cartRoute);
-        },
-        child: Icon(Icons.shopping_cart_outlined),
+      floatingActionButton: Badge(
+        padding: EdgeInsets.all(8),
+        borderSide: BorderSide(color: Colors.black, width: 0.4),
+        badgeColor: Colors.amber,
+        badgeContent: Text(
+          cart.items.length.toString(),
+          textScaleFactor: 1.1,
+        ),
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(context, MyRoutes.cartRoute);
+          },
+          child: Icon(Icons.shopping_cart_outlined),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
 

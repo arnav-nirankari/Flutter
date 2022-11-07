@@ -14,8 +14,9 @@ class UserCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 247, 247, 247),
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         title: const Text("Cart"),
         elevation: 0,
       ),
@@ -44,21 +45,63 @@ class _CartList extends StatelessWidget {
     var cart = context.watch<CartModel>();
 
     return ListView.builder(
-      itemCount: cart.items.length,
-      itemBuilder: (context, index) => ListTile(
-        leading: const Icon(Icons.done),
-        trailing: IconButton(
-          icon: const Icon(Icons.remove_circle_outline),
-          onPressed: () {
-            cart.remove(cart.items[index]);
-          },
-        ),
-        title: Text(
-          cart.items[index].name,
-          style: itemNameStyle,
-        ),
-      ),
-    );
+        itemCount: cart.items.length,
+        itemBuilder: (context, index) => Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 9.0,
+                horizontal: 7,
+              ),
+              child: Card(
+                child: ListTile(
+                  minVerticalPadding: 10,
+                  // minLeadingWidth: MediaQuery.of(context).size.width * 0.19,
+                  title: Text(cart.items[index].name),
+                  leading: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.19,
+                    child: Image.network(
+                      cart.items[index].image,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  subtitle: Text(cart.items[index].desc),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    // crossAxisAlignment: CrossAxisAlignment.center,
+                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        "\$${cart.items[index].price}",
+                        textScaleFactor: 1.4,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            color: Colors.deepPurple,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.remove_circle_outline),
+                        onPressed: () {
+                          cart.remove(cart.items[index]);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+        //  ListTile(
+        //   leading: Image.network(cart.items[index].image),
+        //   trailing: IconButton(
+        // icon: const Icon(Icons.remove_circle_outline),
+        // onPressed: () {
+        //   cart.remove(cart.items[index]);
+        //     },
+        //   ),
+        //   title: Text(
+        //     cart.items[index].name,
+        //     style: itemNameStyle,
+        //   ),
+        // ),
+        );
   }
 }
 
@@ -77,7 +120,9 @@ class _CartTotal extends StatelessWidget {
             Consumer<CartModel>(
                 builder: (context, cart, child) => Text(
                       '\$${cart.totalPrice}',
-                      style: TextStyle(fontSize: 28),
+                      style: const TextStyle(
+                        fontSize: 30,
+                      ),
                     )),
             ElevatedButton(
                 onPressed: (() {}),
