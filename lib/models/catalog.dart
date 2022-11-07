@@ -5,6 +5,12 @@ class CatalogModel {
   static List<Item> items = [
     Item(id: 1, name: "", desc: "", price: 0, color: "", image: "")
   ];
+
+  Item getById(int id) =>
+      // ignore: null_closures
+      items.firstWhere((element) => element.id == id, orElse: null);
+
+  Item getByPosition(int pos) => items[pos];
 }
 
 class Item {
