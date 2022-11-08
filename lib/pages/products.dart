@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:jumbo_electronics/models/catalog.dart';
+import 'package:jumbo_electronics/pages/widgets/HomeGrid.dart';
 
 class HomeProducts extends StatelessWidget {
   final Item items;
@@ -35,11 +36,13 @@ class HomeProducts extends StatelessWidget {
                       minimumSize: MaterialStateProperty.all(Size(
                           MediaQuery.of(context).size.width * 0.33,
                           MediaQuery.of(context).size.height * 0.068))),
-                  child: const Text(
-                    "Buy",
-                    textScaleFactor: 1.39,
-                    style: TextStyle(fontWeight: FontWeight.w700),
-                  ))
+                  child:
+                      // const Text(
+                      //   "Buy",
+                      //   textScaleFactor: 1.39,
+                      //   style: TextStyle(fontWeight: FontWeight.w700),
+                      // )
+                      AddButton(item: items))
             ]),
       ),
       body: SafeArea(

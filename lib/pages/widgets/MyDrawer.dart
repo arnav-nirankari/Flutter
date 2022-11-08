@@ -39,6 +39,22 @@ class MyDrawer extends StatelessWidget {
                 Navigator.pushNamed(context, MyRoutes.loginRoute);
               },
             ),
+            ListTile(
+              leading: const Icon(
+                CupertinoIcons.cart,
+                color: Colors.white,
+              ),
+              title: const Text(
+                "View Cart",
+                textScaleFactor: 1.5,
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, MyRoutes.cartRoute);
+              },
+            ),
             const ListTile(
               leading: Icon(
                 CupertinoIcons.home,

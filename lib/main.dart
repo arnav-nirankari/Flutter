@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          // In this sample app, CatalogModel never changes, so a simple Provider
+          // In this app, CatalogModel never changes, so a simple Provider
           // is sufficient.
           Provider(create: (context) => CatalogModel()),
           // CartModel is implemented as a ChangeNotifier, which calls for the use

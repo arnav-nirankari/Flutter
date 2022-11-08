@@ -13,24 +13,34 @@ class UserCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cart = context.watch<CartModel>();
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 247, 247, 247),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: const Text("Cart"),
+        title: const Text(
+          "Cart",
+          // textScaleFactor: 1.3,
+        ),
         elevation: 0,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 9),
-              child: _CartList(),
+      body: cart.items.isEmpty
+          ? Center(
+              child: Text(
+              "Your cart is empty right now",
+              textScaleFactor: 1.5,
+            ))
+          : Column(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 9),
+                    child: _CartList(),
+                  ),
+                ),
+                _CartTotal()
+              ],
             ),
-          ),
-          _CartTotal()
-        ],
-      ),
     );
   }
 }
@@ -38,7 +48,6 @@ class UserCart extends StatelessWidget {
 class _CartList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var itemNameStyle = Theme.of(context).textTheme.titleLarge;
     // This gets the current state of CartModel and also tells Flutter
     // to rebuild this widget when CartModel notifies listeners (in other words,
     // when it changes).
@@ -78,7 +87,10 @@ class _CartList extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.remove_circle_outline),
+                        icon: const Icon(
+                          Icons.remove_circle_outline,
+                          // color: Colors.deepPurple,
+                        ),
                         onPressed: () {
                           cart.remove(cart.items[index]);
                         },
@@ -120,12 +132,17 @@ class _CartTotal extends StatelessWidget {
             Consumer<CartModel>(
                 builder: (context, cart, child) => Text(
                       '\$${cart.totalPrice}',
+                      textScaleFactor: 2.5,
                       style: const TextStyle(
-                        fontSize: 30,
-                      ),
+                          // fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.deepPurple),
                     )),
             ElevatedButton(
-                onPressed: (() {}),
+                onPressed: (() {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Buying not supported yet.")));
+                }),
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(Size(
                       MediaQuery.of(context).size.width * 0.37,

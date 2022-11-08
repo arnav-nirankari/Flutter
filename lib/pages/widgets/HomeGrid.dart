@@ -82,7 +82,7 @@ class CatalogList extends StatelessWidget {
 class AddButton extends StatelessWidget {
   final Item item;
 
-  const AddButton({required this.item});
+  const AddButton({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {

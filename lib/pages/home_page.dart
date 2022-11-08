@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: Badge(
         padding: EdgeInsets.all(8),
-        borderSide: BorderSide(color: Colors.black, width: 0.4),
+        borderSide: BorderSide(color: Colors.deepPurple, width: 0.4),
         badgeColor: Colors.amber,
         badgeContent: Text(
           cart.items.length.toString(),
