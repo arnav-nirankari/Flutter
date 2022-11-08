@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
 
 import '../models/cart.dart';
@@ -118,8 +119,8 @@ class _CartList extends StatelessWidget {
 }
 
 class _CartTotal extends StatelessWidget {
-  const _CartTotal();
-
+  _CartTotal();
+  final _paymentItems = <PaymentItem>[];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -138,6 +139,21 @@ class _CartTotal extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Colors.deepPurple),
                     )),
+            GooglePayButton(
+              paymentConfigurationAsset: 'gpay.json',
+              paymentItems: _paymentItems,
+              width: 200,
+              height: 50,
+              // style: GooglePayButtonStyle.black,
+              type: GooglePayButtonType.pay,
+              margin: const EdgeInsets.only(top: 15.0),
+              onPaymentResult: (data) {
+                print(data);
+              },
+              loadingIndicator: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
             ElevatedButton(
                 onPressed: (() {
                   ScaffoldMessenger.of(context).showSnackBar(
